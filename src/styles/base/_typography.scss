@@ -2,6 +2,9 @@ body { font-family: Inter, Arial, Helvetica, sans-serif; }
 
 h1, h2 { line-height: 1.05; }
 
-.theme--gaming {
+.theme--gaming .game-screen,
+.theme--gaming .end-screen,
+.theme--gaming .result-screen,
+.theme--gaming .modal {
   font-family: "Trebuchet MS", "Courier New", monospace;
 }

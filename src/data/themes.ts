@@ -1,7 +1,7 @@
 import type { ThemeDefinition, ThemeId } from "../types";
 
 const assetUrl = (folder: string, file: string): string =>
-  `${import.meta.env.BASE_URL}assets/icons/${folder}/${encodeURIComponent(file)}`;
+  encodeURI(`${import.meta.env.BASE_URL}assets/icons/${folder}/${file}`);
 
 const codeVibesFiles = [
   "giticon.svg", "typescript.svg", "javascript.svg", "html.svg", "vscode.svg", "css.svg",
@@ -21,11 +21,15 @@ export const themes: Record<ThemeId, ThemeDefinition> = {
   "code-vibes": {
     id: "code-vibes", label: "Code vibes theme", folder: "code-vibes",
     cardBack: assetUrl("code-vibes", "greencardfront.svg"),
+    settingsCard: assetUrl("code-vibes", "code-vibes-settings-card.svg"),
+    previewCard: assetUrl("code-vibes", "front-code-vibe.svg"),
     icons: codeVibesFiles.map((file) => assetUrl("code-vibes", file)),
   },
   gaming: {
     id: "gaming", label: "Gaming theme", folder: "game-theme",
     cardBack: assetUrl("game-theme", "redcardfront.svg"),
+    settingsCard: assetUrl("game-theme", "game-theme-settings-card.svg"),
+    previewCard: assetUrl("game-theme", "front-game-theme.svg"),
     icons: gamingFiles.map((file) => assetUrl("game-theme", file)),
   },
 };

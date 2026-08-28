@@ -17,5 +17,17 @@
   &__icon { width: 30px; }
 }
 
-.theme--gaming .button--primary { background: $pink; color: #fff; }
-.theme--gaming .button--outline { border-color: $pink; }
+.theme--gaming .game-screen .button--primary,
+.theme--gaming .end-screen .button--primary,
+.theme--gaming .result-screen .button--primary,
+.theme--gaming .modal .button--primary {
+  background: $pink;
+  color: #fff;
+}
+
+.theme--gaming .game-screen .button--outline,
+.theme--gaming .end-screen .button--outline,
+.theme--gaming .result-screen .button--outline,
+.theme--gaming .modal .button--outline {
+  border-color: $pink;
+}

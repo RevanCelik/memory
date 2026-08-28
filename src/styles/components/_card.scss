@@ -10,5 +10,6 @@
   &.is-matched .memory-card__front { box-shadow: 0 0 0 3px $mint, 0 0 16px rgba($mint, 0.75); }
 }
 
+.theme--gaming .memory-card { aspect-ratio: 105 / 120; }
 .theme--gaming .memory-card__front { background: #fff; border-radius: 8px; }
 .theme--gaming .memory-card.is-matched .memory-card__front { box-shadow: 0 0 0 3px $pink, 0 0 16px rgba($pink, 0.7); }

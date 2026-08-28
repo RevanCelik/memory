@@ -8,6 +8,8 @@ export interface ThemeDefinition {
   label: string;
   folder: string;
   cardBack: string;
+  settingsCard: string;
+  previewCard: string;
   icons: string[];
 }
 
