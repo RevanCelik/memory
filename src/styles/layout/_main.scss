@@ -1,1 +1,15 @@
-// Shared page and main-content layout.
+.section-title {
+  position: relative;
+  width: fit-content;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: -0.5rem;
+  right: -0.5rem;
+  bottom: -0.4rem;
+  height: 3px;
+  background: #f4ec62;
+}

@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -noEmit && vite build",
+    "build": "tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "sass": "^1.103.1",
     "typescript": "^7.0.2",

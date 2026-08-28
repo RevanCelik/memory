@@ -1,1 +1,14 @@
-// Responsive grid layouts for all board sizes.
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  gap: clamp(4px, 0.8vw, 10px);
+  width: min(72vh, 560px, calc(100vw - 2rem));
+  margin: clamp(1rem, 4vh, 2.5rem) auto 1.5rem;
+}
+
+.game-screen--24 .game-board { width: min(72vh, 700px, calc(100vw - 2rem)); }
+.game-screen--36 .game-board { width: min(76vh, 620px, calc(100vw - 2rem)); }
+
+@media (max-width: 650px) {
+  .game-board, .game-screen--24 .game-board, .game-screen--36 .game-board { margin-top: 1rem; }
+}

@@ -1,1 +1,15 @@
-// Global document and body styles.
+@use "../abstracts" as *;
+
+body { background: $dark; color: #fff; }
+
+.app-shell { min-height: 100vh; overflow: hidden; }
+
+.screen { min-height: 100vh; }
+
+.player--blue, .player-marker--blue { color: $blue; }
+.player--orange, .player-marker--orange { color: $orange; }
+
+button:focus-visible, input:focus-visible + span {
+  outline: 3px solid $yellow;
+  outline-offset: 3px;
+}

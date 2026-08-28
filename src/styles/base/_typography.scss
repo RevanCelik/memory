@@ -1,1 +1,7 @@
-// Global font and text styles.
+body { font-family: Inter, Arial, Helvetica, sans-serif; }
+
+h1, h2 { line-height: 1.05; }
+
+.theme--gaming {
+  font-family: "Trebuchet MS", "Courier New", monospace;
+}

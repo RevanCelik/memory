@@ -1,1 +1,14 @@
-// Memory card front, back, and flip states.
+@use "../abstracts" as *;
+
+.memory-card {
+  width: 100%; aspect-ratio: 1; border: 0; padding: 0; background: transparent; perspective: 700px;
+  &__inner { position: relative; display: block; width: 100%; height: 100%; transition: transform 0.55s ease; transform-style: preserve-3d; }
+  &__side { position: absolute; inset: 0; display: grid; place-items: center; backface-visibility: hidden; }
+  &__side img { width: 100%; height: 100%; object-fit: contain; }
+  &__front { transform: rotateY(180deg); padding: 15%; background: #eff9f6; }
+  &.is-flipped .memory-card__inner { transform: rotateY(180deg); }
+  &.is-matched .memory-card__front { box-shadow: 0 0 0 3px $mint, 0 0 16px rgba($mint, 0.75); }
+}
+
+.theme--gaming .memory-card__front { background: #fff; border-radius: 8px; }
+.theme--gaming .memory-card.is-matched .memory-card__front { box-shadow: 0 0 0 3px $pink, 0 0 16px rgba($pink, 0.7); }

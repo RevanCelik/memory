@@ -1,1 +1,10 @@
-// Dialogs such as the game-over message.
+@use "../abstracts" as *;
+
+.modal-backdrop { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 1rem; background: rgba(#000, 0.6); }
+.modal { width: min(440px, 100%); padding: 2.2rem; text-align: center; color: $dark; background: #fff; }
+.modal h2 { font-size: 1.35rem; max-width: 330px; margin: 0 auto; }
+.modal__actions { display: flex; justify-content: center; gap: 1rem; margin-top: 1.8rem; }
+.modal .button--outline { color: $mint; }
+
+.theme--gaming .modal { color: $gaming-bg; border-radius: 14px; }
+.theme--gaming .modal .button--outline { color: $pink; }

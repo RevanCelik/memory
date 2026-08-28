@@ -1,1 +1,9 @@
-// Reusable mixins for layouts, media queries, and animations.
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin mobile {
+  @media (max-width: 720px) { @content; }
+}
