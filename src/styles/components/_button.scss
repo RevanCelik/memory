@@ -10,6 +10,7 @@
 
   &:hover { filter: brightness(1.06); transform: translateY(-2px); }
   &:active { transform: translateY(0); }
+  &:disabled { cursor: not-allowed; color: #aaa; background: #ddd; filter: none; transform: none; }
 
   &--primary { background: $yellow; color: $dark; }
   &--outline { background: transparent; border-color: $mint; }
@@ -30,4 +31,47 @@
 .theme--gaming .result-screen .button--outline,
 .theme--gaming .modal .button--outline {
   border-color: $pink;
+}
+
+.start-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 140px;
+  width: 140px;
+  height: 61px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+
+  img { position: absolute; object-fit: contain; }
+
+  &__default,
+  &__disabled { width: 126px; height: 53px; }
+
+  &__hover { display: none; width: 140px; height: 61px; }
+  &__disabled { display: none; }
+
+  &:not(:disabled):hover &__default { display: none; }
+  &:not(:disabled):hover &__hover { display: block; }
+  &:disabled { cursor: not-allowed; }
+  &:disabled &__default { display: none; }
+  &:disabled &__disabled { display: block; }
+}
+
+.home-play-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(270px, 72vw);
+  aspect-ratio: 270 / 102;
+  border: 0;
+  padding: 0;
+  background: transparent;
+
+  img { position: absolute; width: 100%; height: 100%; object-fit: contain; }
+  &__default { width: 92.6% !important; height: 96% !important; }
+  &__hover { display: none; }
+  &:hover &__default { display: none; }
+  &:hover &__hover { display: block; }
 }

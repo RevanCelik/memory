@@ -6,10 +6,8 @@ export type Screen = "home" | "settings" | "game" | "game-over" | "result";
 export interface ThemeDefinition {
   id: ThemeId;
   label: string;
-  folder: string;
   cardBack: string;
-  settingsCard: string;
-  previewCard: string;
+  themeVisual: string;
   icons: string[];
 }
 
@@ -22,7 +20,7 @@ export interface CardState {
 }
 
 export interface GameSettings {
-  theme: ThemeId;
-  startingPlayer: PlayerId;
-  boardSize: BoardSize;
+  theme: ThemeId | null;
+  startingPlayer: PlayerId | null;
+  boardSize: BoardSize | null;
 }

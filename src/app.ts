@@ -4,9 +4,23 @@ import type { BoardSize, GameSettings, PlayerId, Screen, ThemeId } from "./types
 
 const controllerIcon = `<svg viewBox="0 0 120 82" aria-hidden="true"><path d="M35 23h50c12 0 19 10 23 23l8 24c3 10-8 16-15 9L84 62H36L19 79c-7 7-18 1-15-9l8-24c4-13 11-23 23-23Z" fill="none" stroke="currentColor" stroke-width="7"/><path d="M35 38v17M26 46h18" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><circle cx="87" cy="41" r="4" fill="currentColor"/><circle cx="98" cy="52" r="4" fill="currentColor"/></svg>`;
 
+const buttonAsset = (file: string): string =>
+  encodeURI(`${import.meta.env.BASE_URL}assets/icons/button/${file}`);
+
+const startButtonAssets = {
+  default: buttonAsset("Property 1=default.svg"),
+  hover: buttonAsset("Property 1=hover.svg"),
+  disabled: buttonAsset("Property 1=disabled.svg"),
+};
+
+const playButtonAssets = {
+  default: buttonAsset("play_default.svg"),
+  hover: buttonAsset("play_hover.svg"),
+};
+
 export class MemoryApp {
   private screen: Screen = "home";
-  private settings: GameSettings = { theme: "code-vibes", startingPlayer: "blue", boardSize: 16 };
+  private settings: GameSettings = { theme: null, startingPlayer: null, boardSize: null };
   private game: MemoryGame | null = null;
   private exitDialogOpen = false;
   private resultTimer: number | undefined;
@@ -45,7 +59,9 @@ export class MemoryApp {
   }
 
   private startGame(): void {
-    this.game = new MemoryGame(themes[this.settings.theme], this.settings.boardSize, this.settings.startingPlayer);
+    const { theme, boardSize, startingPlayer } = this.settings;
+    if (!theme || !boardSize || !startingPlayer) return;
+    this.game = new MemoryGame(themes[theme], boardSize, startingPlayer);
     this.screen = "game";
   }
 
@@ -77,7 +93,8 @@ export class MemoryApp {
   }
 
   private render(): void {
-    this.root.innerHTML = `<div class="app-shell theme--${this.settings.theme}">${this.renderScreen()}${this.renderExitDialog()}</div>`;
+    const activeTheme = this.settings.theme ?? "code-vibes";
+    this.root.innerHTML = `<div class="app-shell theme--${activeTheme}">${this.renderScreen()}${this.renderExitDialog()}</div>`;
   }
 
   private renderScreen(): string {
@@ -89,32 +106,43 @@ export class MemoryApp {
   }
 
   private renderHome(): string {
-    return `<section class="home-screen screen"><div class="home-screen__content"><p>It’s play time.</p><h1>Ready to play?</h1><button class="button button--primary home-screen__button" data-action="open-settings"><span class="button__icon">${controllerIcon}</span><span>Play</span><span aria-hidden="true">→</span></button></div><div class="home-screen__controller">${controllerIcon}</div></section>`;
+    return `<section class="home-screen screen"><div class="home-screen__content"><p>It’s play time.</p><h1>Ready to play?</h1><button class="home-play-button" data-action="open-settings" aria-label="Play"><img class="home-play-button__default" src="${playButtonAssets.default}" alt=""><img class="home-play-button__hover" src="${playButtonAssets.hover}" alt=""></button></div><div class="home-screen__controller">${controllerIcon}</div></section>`;
   }
 
   private renderSettings(): string {
-    const theme = themes[this.settings.theme];
+    const theme = themes[this.settings.theme ?? "code-vibes"];
     return `<section class="settings-screen screen"><div class="settings-screen__inner"><h1 class="section-title">Settings</h1><div class="settings-screen__grid"><form class="settings-form">
       <fieldset><legend><b class="legend-icon legend-icon--theme">◉</b>Game themes</legend>${Object.values(themes).map(({ id, label }) => this.radio("theme", id, label, this.settings.theme)).join("")}</fieldset>
       <fieldset><legend><b class="legend-icon legend-icon--player">♙</b>Choose player</legend>${this.radio("player", "blue", "Blue", this.settings.startingPlayer)}${this.radio("player", "orange", "Orange", this.settings.startingPlayer)}</fieldset>
       <fieldset><legend><b class="legend-icon legend-icon--board">◫</b>Board size</legend>${this.radio("board-size", "16", "16 cards", this.settings.boardSize)}${this.radio("board-size", "24", "24 cards", this.settings.boardSize)}${this.radio("board-size", "36", "36 cards", this.settings.boardSize)}</fieldset>
-      </form><div class="settings-preview"><div class="settings-preview__panel">${this.renderScoreboard(true)}<div class="settings-preview__cards"><img class="settings-preview__card-back" src="${theme.settingsCard}" alt="Closed memory card"><img class="settings-preview__card-face" src="${theme.previewCard}" alt="Open memory card"></div></div><div class="settings-steps"><span>Game theme</span><i></i><span>Player</span><i></i><span>Board size</span><button class="button button--primary button--start" data-action="start-game">▣&nbsp; Start</button></div></div></div></div></section>`;
+      </form><div class="settings-preview"><img class="settings-preview__visual" src="${theme.themeVisual}" alt="${theme.label} preview">${this.renderSettingsSteps()}</div></div></div></section>`;
   }
 
-  private radio(name: string, value: string, label: string, selected: string | number): string {
+  private radio(name: string, value: string, label: string, selected: string | number | null): string {
     const checked = value === String(selected) ? "checked" : "";
-    return `<label class="settings-option"><input type="radio" name="${name}" value="${value}" ${checked}><span>${label}</span></label>`;
+    return `<label class="settings-option"><input type="radio" name="${name}" value="${value}" ${checked}><span class="settings-option__label">${label}</span><span class="settings-option__marker" aria-hidden="true"><i></i><b></b></span></label>`;
   }
 
-  private renderScoreboard(compact = false): string {
+  private renderSettingsSteps(): string {
+    const themeLabel = this.settings.theme ? themes[this.settings.theme].label.replace(" theme", "") : "Theme";
+    const playerLabel = this.settings.startingPlayer
+      ? `${this.settings.startingPlayer === "blue" ? "Blue" : "Orange"} player`
+      : "Player";
+    const boardLabel = this.settings.boardSize ? `Board-${this.settings.boardSize} Cards` : "Board size";
+    const isComplete = Boolean(this.settings.theme && this.settings.startingPlayer && this.settings.boardSize);
+    return `<div class="settings-steps ${isComplete ? "is-complete" : ""}"><span>${themeLabel}</span><i></i><span>${playerLabel}</span><i></i><span>${boardLabel}</span><button class="start-button" data-action="start-game" aria-label="Start game" ${isComplete ? "" : "disabled"}><img class="start-button__default" src="${startButtonAssets.default}" alt=""><img class="start-button__hover" src="${startButtonAssets.hover}" alt=""><img class="start-button__disabled" src="${startButtonAssets.disabled}" alt=""></button></div>`;
+  }
+
+  private renderScoreboard(): string {
     const scores = this.game?.scores ?? { blue: 0, orange: 0 };
-    const current = this.game?.currentPlayer ?? this.settings.startingPlayer;
-    return `<header class="scoreboard ${compact ? "scoreboard--compact" : ""}"><div class="scoreboard__scores"><span class="player--blue">◆ Blue ${scores.blue}</span><span class="player--orange">◆ Orange ${scores.orange}</span></div><div class="scoreboard__current">Current player: <span class="player-marker--${current}" aria-label="${current} player">◆</span></div>${compact ? "" : `<button class="button button--outline" data-action="open-exit">⇥&nbsp; Exit game</button>`}</header>`;
+    const current = this.game?.currentPlayer ?? this.settings.startingPlayer ?? "blue";
+    return `<header class="scoreboard"><div class="scoreboard__scores"><span class="player--blue">◆ Blue ${scores.blue}</span><span class="player--orange">◆ Orange ${scores.orange}</span></div><div class="scoreboard__current">Current player: <span class="player-marker--${current}" aria-label="${current} player">◆</span></div><button class="button button--outline" data-action="open-exit">⇥&nbsp; Exit game</button></header>`;
   }
 
   private renderGame(): string {
     if (!this.game) return "";
-    const theme = themes[this.settings.theme];
+    const activeTheme = this.settings.theme ?? "code-vibes";
+    const theme = themes[activeTheme];
     const columns = this.settings.boardSize === 16 ? 4 : 6;
     return `<section class="game-screen screen game-screen--${this.settings.boardSize}">${this.renderScoreboard()}<div class="game-board" style="--columns:${columns}" aria-label="Memory game board">${this.game.cards.map((card) => `<button class="memory-card ${card.isFlipped ? "is-flipped" : ""} ${card.isMatched ? "is-matched" : ""}" data-action="flip-card" data-card-id="${card.id}" aria-label="${card.isFlipped ? "Open card" : "Turn card"}" ${card.isMatched ? "disabled" : ""}><span class="memory-card__inner"><span class="memory-card__side memory-card__back"><img src="${theme.cardBack}" alt=""></span><span class="memory-card__side memory-card__front"><img src="${card.icon}" alt=""></span></span></button>`).join("")}</div></section>`;
   }

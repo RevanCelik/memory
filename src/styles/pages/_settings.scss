@@ -10,20 +10,14 @@
 .legend-icon--theme { color: #f20ac0; }
 .legend-icon--player { color: #00dcb4; }
 .legend-icon--board { color: #124cec; }
-.settings-preview__panel { display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: 1.1; padding: 1rem; overflow: hidden; border-radius: 14px; background: $dark; }
-.settings-preview__cards { position: relative; display: flex; justify-content: center; align-items: center; flex: 1; }
-.settings-preview__cards > img { width: 38%; max-height: 64%; object-fit: contain; filter: drop-shadow(0 10px 10px rgba(#000, 0.2)); }
-.settings-preview__card-back { position: relative; z-index: 2; transform: rotate(-7deg) translateX(10%); }
-.settings-preview__card-face { position: relative; z-index: 1; margin-left: -5%; transform: rotate(11deg) translateX(-4%); }
+.settings-preview__visual { display: block; width: 100%; height: auto; }
 .settings-steps { display: flex; align-items: center; justify-content: center; gap: 0.9rem; margin-top: 2rem; padding: 0.7rem; background: #f6f6f6; font-size: 0.85rem; }
 .settings-steps i { width: 5px; height: 42px; background: $yellow; transform: skew(-18deg); }
-
-.theme--gaming .settings-preview__panel { background: $gaming-bg; }
 
 @media (max-width: 760px) {
   .settings-screen__grid { grid-template-columns: 1fr; margin-top: 2.5rem; }
   .settings-preview { max-width: 520px; }
   .settings-steps { flex-wrap: wrap; }
   .settings-steps i, .settings-steps > span { display: none; }
-  .button--start { width: 100%; }
+  .start-button { margin: 0 auto; }
 }

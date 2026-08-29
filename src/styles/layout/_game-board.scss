@@ -9,16 +9,9 @@
 .game-screen--24 .game-board { width: min(72vh, 700px, calc(100vw - 2rem)); }
 .game-screen--36 .game-board { width: min(76vh, 620px, calc(100vw - 2rem)); }
 
-.theme--gaming .game-board {
-  column-gap: clamp(10px, 1.2vw, 16px);
-  row-gap: clamp(12px, 1.4vw, 18px);
-}
+// Gaming SVGs include transparent space around their built-in shadows.
+.theme--gaming .game-board { gap: 0; }
 
 @media (max-width: 650px) {
   .game-board, .game-screen--24 .game-board, .game-screen--36 .game-board { margin-top: 1rem; }
-
-  .theme--gaming .game-board {
-    column-gap: 8px;
-    row-gap: 10px;
-  }
 }

@@ -4,32 +4,32 @@ const assetUrl = (folder: string, file: string): string =>
   encodeURI(`${import.meta.env.BASE_URL}assets/icons/${folder}/${file}`);
 
 const codeVibesFiles = [
-  "giticon.svg", "typescript.svg", "javascript.svg", "html.svg", "vscode.svg", "css.svg",
-  "django.svg", "angular.svg", "terminal.svg", "python.svg", "githublogo.svg", "node.js.svg",
-  "bootstrap.svg", "vuejs.svg", "react.svg", "sass.svg", "sql.svg", "firebase.svg",
+  "Front.svg",
+  "Front (1).svg", "Front (2).svg", "Front (3).svg", "Front (4).svg", "Front (5).svg",
+  "Front (6).svg", "Front (7).svg", "Front (8).svg", "Front (9).svg", "Front (10).svg",
+  "Front (11).svg", "Front (12).svg", "Front (13).svg", "Front (14).svg",
+  "Front (15).svg", "Front (16).svg", "Front (17).svg",
 ];
 
 const gamingFiles = [
-  "Asset 9@2x 1.svg", "Asset 8@2x 2.svg", "Asset 10@2x 1.svg", "Asset 11@2x 1.svg",
-  "Asset 12@2x 1.svg", "Asset 13@2x 1.svg", "Asset 14@2x 1.svg", "Asset 15@2x 1.svg",
-  "Asset 16@2x 1.svg", "Asset 17@2x 1.svg", "Asset 18@2x 1.svg", "Asset 19@2x 1.svg",
-  "Asset 3@2x 1.svg", "Asset 4@2x 1.svg", "Asset 5@2x 1.svg", "Asset 6@2x 1.svg",
-  "Asset 8@2x 1.svg", "play button@2x 1.svg",
+  "Front.svg",
+  "Front (1).svg", "Front (2).svg", "Front (3).svg", "Front (4).svg", "Front (5).svg",
+  "Front (6).svg", "Front (7).svg", "Front (8).svg", "Front (9).svg", "Front (10).svg",
+  "Front (11).svg", "Front (12).svg", "Front (13).svg", "Front (14).svg",
+  "Front (15).svg", "Front (16).svg", "Front (17).svg",
 ];
 
 export const themes: Record<ThemeId, ThemeDefinition> = {
   "code-vibes": {
-    id: "code-vibes", label: "Code vibes theme", folder: "code-vibes",
+    id: "code-vibes", label: "Code vibes theme",
     cardBack: assetUrl("code-vibes", "greencardfront.svg"),
-    settingsCard: assetUrl("code-vibes", "code-vibes-settings-card.svg"),
-    previewCard: assetUrl("code-vibes", "front-code-vibe.svg"),
+    themeVisual: assetUrl("themevisual", "codevibesvisual.svg"),
     icons: codeVibesFiles.map((file) => assetUrl("code-vibes", file)),
   },
   gaming: {
-    id: "gaming", label: "Gaming theme", folder: "game-theme",
-    cardBack: assetUrl("game-theme", "redcardfront.svg"),
-    settingsCard: assetUrl("game-theme", "game-theme-settings-card.svg"),
-    previewCard: assetUrl("game-theme", "front-game-theme.svg"),
+    id: "gaming", label: "Gaming theme",
+    cardBack: assetUrl("game-theme", "redcard.svg"),
+    themeVisual: assetUrl("themevisual", "gamethemevisual.svg"),
     icons: gamingFiles.map((file) => assetUrl("game-theme", file)),
   },
 };
