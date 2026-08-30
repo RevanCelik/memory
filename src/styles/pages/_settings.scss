@@ -12,7 +12,24 @@
 .legend-icon--board { color: #124cec; }
 .settings-preview__visual { display: block; width: 100%; height: auto; }
 .settings-steps { display: flex; align-items: center; justify-content: center; gap: 0.9rem; margin-top: 2rem; padding: 0.7rem; background: #f6f6f6; font-size: 0.85rem; }
-.settings-steps i { width: 5px; height: 42px; background: $yellow; transform: skew(-18deg); }
+.settings-steps i {
+  position: relative;
+  width: 4px;
+  height: 42px;
+  background: $yellow;
+  transform: skew(-18deg);
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    width: 9px;
+    height: 9px;
+    background: $yellow;
+    transform: translateX(-50%) skew(18deg) rotate(45deg);
+  }
+}
 
 @media (max-width: 760px) {
   .settings-screen__grid { grid-template-columns: 1fr; margin-top: 2.5rem; }

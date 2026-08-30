@@ -12,6 +12,7 @@
 .result-screen--blue h1 { color: $blue; text-shadow: none; }
 .result-screen--orange h1 { color: $orange; text-shadow: none; }
 .result-screen__symbol { margin: 1.6rem 0; color: $mint; font-size: clamp(6rem, 14vw, 10rem); line-height: 1; }
+.result-screen__visual { width: auto; max-width: min(280px, 60vw); max-height: min(320px, 42vh); margin: 1.6rem 0; object-fit: contain; }
 
 .theme--gaming .end-screen, .theme--gaming .result-screen { background: $gaming-bg; }
 .theme--gaming .end-screen h1, .theme--gaming .result-screen h1 { color: $pink; font-family: inherit; text-shadow: 4px 4px 0 #7c1347; }

@@ -25,6 +25,11 @@ export const themes: Record<ThemeId, ThemeDefinition> = {
     cardBack: assetUrl("code-vibes", "greencardfront.svg"),
     themeVisual: assetUrl("themevisual", "codevibesvisual.svg"),
     icons: codeVibesFiles.map((file) => assetUrl("code-vibes", file)),
+    resultVisuals: {
+      blue: assetUrl("winnerscreen/codevibes", "blueplayer_code.svg"),
+      orange: assetUrl("winnerscreen/codevibes", "orangeplayer_code.svg"),
+      draw: assetUrl("winnerscreen/codevibes", "Scale_Icon.svg"),
+    },
   },
   gaming: {
     id: "gaming", label: "Gaming theme",

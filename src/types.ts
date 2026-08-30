@@ -9,6 +9,7 @@ export interface ThemeDefinition {
   cardBack: string;
   themeVisual: string;
   icons: string[];
+  resultVisuals?: Record<"blue" | "orange" | "draw", string>;
 }
 
 export interface CardState {

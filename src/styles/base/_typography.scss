@@ -1,10 +1,49 @@
+@font-face {
+  font-family: "Roboto Mono Local";
+  src: url("/projects/memory/assets/fonts/code-vibes/RobotoMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Mono Local";
+  src: url("/projects/memory/assets/fonts/code-vibes/RobotoMono-Bold.ttf") format("truetype");
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bitcount Single Local";
+  src: url("/projects/memory/assets/fonts/gaming/BitcountSingle-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bitcount Single Local";
+  src: url("/projects/memory/assets/fonts/gaming/BitcountSingle-Bold.ttf") format("truetype");
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 body { font-family: Inter, Arial, Helvetica, sans-serif; }
 
 h1, h2 { line-height: 1.05; }
+
+.theme--code-vibes .game-screen,
+.theme--code-vibes .end-screen,
+.theme--code-vibes .result-screen,
+.theme--code-vibes .modal {
+  font-family: "Roboto Mono Local", "Courier New", monospace;
+}
 
 .theme--gaming .game-screen,
 .theme--gaming .end-screen,
 .theme--gaming .result-screen,
 .theme--gaming .modal {
-  font-family: "Trebuchet MS", "Courier New", monospace;
+  font-family: "Bitcount Single Local", "Courier New", monospace;
 }

@@ -159,7 +159,12 @@ export class MemoryApp {
   private renderResult(): string {
     const scores = this.game?.scores ?? { blue: 0, orange: 0 };
     const winner = scores.blue === scores.orange ? "draw" : scores.blue > scores.orange ? "blue" : "orange";
-    return `<section class="result-screen screen result-screen--${winner}"><p>${winner === "draw" ? "It’s a" : "The winner is"}</p><h1>${winner === "draw" ? "Draw" : `${winner} player`}</h1><div class="result-screen__symbol" aria-hidden="true">${winner === "draw" ? "⚖" : "🏆"}</div><button class="button button--outline" data-action="go-home">Back to start</button></section>`;
+    const theme = themes[this.settings.theme ?? "code-vibes"];
+    const resultVisual = theme.resultVisuals?.[winner];
+    const visual = resultVisual
+      ? `<img class="result-screen__visual" src="${resultVisual}" alt="">`
+      : `<div class="result-screen__symbol" aria-hidden="true">${winner === "draw" ? "⚖" : "🏆"}</div>`;
+    return `<section class="result-screen screen result-screen--${winner}"><p>${winner === "draw" ? "It’s a" : "The winner is"}</p><h1>${winner === "draw" ? "Draw" : `${winner} player`}</h1>${visual}<button class="button button--outline" data-action="go-home">Back to start</button></section>`;
   }
 
   private renderExitDialog(): string {
