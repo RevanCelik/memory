@@ -6,7 +6,7 @@
   padding: 0.65rem 1.1rem;
   font-weight: 700;
   color: inherit;
-  transition: transform $transition, filter $transition, background $transition;
+  transition: transform $transition, filter $transition, background $transition, box-shadow $transition;
 
   &:hover { filter: brightness(1.06); transform: translateY(-2px); }
   &:active { transform: translateY(0); }
@@ -16,6 +16,10 @@
   &--outline { background: transparent; border-color: $mint; }
 
   &__icon { width: 30px; }
+}
+
+.game-screen .button--outline:hover {
+  box-shadow: inset 0 0 0 2px $mint;
 }
 
 .theme--gaming .game-screen .button--primary,
@@ -31,6 +35,10 @@
 .theme--gaming .result-screen .button--outline,
 .theme--gaming .modal .button--outline {
   border-color: $pink;
+}
+
+.theme--gaming .game-screen .button--outline:hover {
+  box-shadow: inset 0 0 0 2px $pink;
 }
 
 .start-button {

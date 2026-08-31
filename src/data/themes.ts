@@ -36,5 +36,10 @@ export const themes: Record<ThemeId, ThemeDefinition> = {
     cardBack: assetUrl("game-theme", "redcard.svg"),
     themeVisual: assetUrl("themevisual", "gamethemevisual.svg"),
     icons: gamingFiles.map((file) => assetUrl("game-theme", file)),
+    resultVisuals: {
+      blue: assetUrl("winnerscreen/gametheme", "pockal 1.svg"),
+      orange: assetUrl("winnerscreen/gametheme", "pockal 1.svg"),
+      draw: assetUrl("winnerscreen/gametheme", "Scale_Icon.svg"),
+    },
   },
 };

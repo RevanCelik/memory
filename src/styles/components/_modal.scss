@@ -6,5 +6,30 @@
 .modal__actions { display: flex; justify-content: center; gap: 1rem; margin-top: 1.8rem; }
 .modal .button--outline { color: $mint; }
 
+.theme--code-vibes .modal .button--primary {
+  background: $mint;
+  color: #fff;
+
+  &:hover {
+    background: #82ddcf;
+    box-shadow: inset 0 0 0 2px #2eb6a2, 0 0 7px rgba($mint, 0.28);
+    filter: none;
+    transform: none;
+  }
+}
+
+.theme--code-vibes .modal .button--outline {
+  border-color: $mint;
+  color: $mint;
+
+  &:hover {
+    background: #e8efee;
+    color: $mint;
+    box-shadow: inset 0 0 0 2px $mint, 0 0 7px rgba($mint, 0.28);
+    filter: none;
+    transform: none;
+  }
+}
+
 .theme--gaming .modal { color: $gaming-bg; border-radius: 14px; }
 .theme--gaming .modal .button--outline { color: $pink; }
