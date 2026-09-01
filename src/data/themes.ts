@@ -25,6 +25,10 @@ export const themes: Record<ThemeId, ThemeDefinition> = {
     cardBack: assetUrl("code-vibes", "greencardfront.svg"),
     themeVisual: assetUrl("themevisual", "codevibesvisual.svg"),
     icons: codeVibesFiles.map((file) => assetUrl("code-vibes", file)),
+    exitButton: {
+      default: assetUrl("button/codevibe", "codevibe_default.svg"),
+      hover: assetUrl("button/codevibe", "codevibe_hover.svg"),
+    },
     resultVisuals: {
       blue: assetUrl("winnerscreen/codevibes", "blueplayer_code.svg"),
       orange: assetUrl("winnerscreen/codevibes", "orangeplayer_code.svg"),
@@ -36,6 +40,10 @@ export const themes: Record<ThemeId, ThemeDefinition> = {
     cardBack: assetUrl("game-theme", "redcard.svg"),
     themeVisual: assetUrl("themevisual", "gamethemevisual.svg"),
     icons: gamingFiles.map((file) => assetUrl("game-theme", file)),
+    exitButton: {
+      default: assetUrl("button/gametheme", "gametheme_default.svg"),
+      hover: assetUrl("button/gametheme", "gametheme_hover.svg"),
+    },
     resultVisuals: {
       blue: assetUrl("winnerscreen/gametheme", "pockal 1.svg"),
       orange: assetUrl("winnerscreen/gametheme", "pockal 1.svg"),

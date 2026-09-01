@@ -12,7 +12,7 @@
   &__scores { justify-self: start; padding: 0.7rem 1rem; background: rgba($mint, 0.14); font-weight: 800; }
   &__scores span + span { margin-left: 0.5rem; }
   &__current { white-space: nowrap; }
-  .button { justify-self: end; }
+  .game-exit-button { justify-self: end; }
 }
 
 .theme--gaming .scoreboard {
@@ -26,5 +26,6 @@
 @media (max-width: 650px) {
   .scoreboard { grid-template-columns: 1fr auto; gap: 0.7rem; width: calc(100% - 1rem); font-size: 0.72rem; }
   .scoreboard__current { grid-row: 2; grid-column: 1 / -1; justify-self: center; }
-  .scoreboard .button { min-height: 34px; padding: 0.4rem 0.6rem; }
+  .scoreboard .game-exit-button { width: 153px; height: 52px; }
+  .scoreboard .game-exit-button img { transform: scale(0.7); transform-origin: top left; }
 }

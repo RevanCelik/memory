@@ -18,10 +18,6 @@
   &__icon { width: 30px; }
 }
 
-.game-screen .button--outline:hover {
-  box-shadow: inset 0 0 0 2px $mint;
-}
-
 .theme--gaming .game-screen .button--primary,
 .theme--gaming .end-screen .button--primary,
 .theme--gaming .result-screen .button--primary,
@@ -35,10 +31,6 @@
 .theme--gaming .result-screen .button--outline,
 .theme--gaming .modal .button--outline {
   border-color: $pink;
-}
-
-.theme--gaming .game-screen .button--outline:hover {
-  box-shadow: inset 0 0 0 2px $pink;
 }
 
 .start-button {
@@ -82,4 +74,37 @@
   &__hover { display: none; }
   &:hover &__default { display: none; }
   &:hover &__hover { display: block; }
+}
+
+.game-exit-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 219px;
+  height: 74px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+
+  img {
+    position: absolute;
+    margin: 0;
+    object-fit: contain;
+    pointer-events: none;
+    transition: opacity 260ms ease;
+  }
+
+  &__default { top: 0; left: 0; width: 207px; height: 62px; opacity: 1; }
+  &__hover { top: -2px; left: -2px; width: 219px; height: 74px; opacity: 0; }
+
+  &:hover &__default { opacity: 0; }
+  &:hover &__hover { opacity: 1; }
+}
+
+.theme--gaming .game-exit-button {
+  width: 205px;
+  height: 64px;
+
+  .game-exit-button__default { width: 195px; height: 54px; }
+  .game-exit-button__hover { width: 205px; height: 64px; }
 }

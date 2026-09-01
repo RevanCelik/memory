@@ -68,20 +68,45 @@ export class MemoryApp {
   private flipCard(cardId: string): void {
     if (!this.game) return;
     const result = this.game.flip(cardId);
-    this.render();
+    this.syncGameView();
     if (result === "miss") {
       window.setTimeout(() => {
         this.game?.closeMismatch();
-        this.render();
+        this.syncGameView();
       }, 850);
     }
     if (result === "match" && this.game.isComplete) {
-      this.screen = "game-over";
-      this.render();
-      this.resultTimer = window.setTimeout(() => {
-        this.screen = "result";
+      window.setTimeout(() => {
+        this.screen = "game-over";
         this.render();
-      }, 1800);
+        this.resultTimer = window.setTimeout(() => {
+          this.screen = "result";
+          this.render();
+        }, 1800);
+      }, 520);
+    }
+  }
+
+  private syncGameView(): void {
+    if (!this.game || this.screen !== "game") return;
+
+    this.game.cards.forEach((card) => {
+      const element = this.root.querySelector<HTMLButtonElement>(`[data-card-id="${card.id}"]`);
+      if (!element) return;
+      element.classList.toggle("is-flipped", card.isFlipped);
+      element.classList.toggle("is-matched", card.isMatched);
+      element.disabled = card.isMatched;
+      element.setAttribute("aria-label", card.isFlipped ? "Open card" : "Turn card");
+    });
+
+    const blueScore = this.root.querySelector<HTMLElement>("[data-score='blue']");
+    const orangeScore = this.root.querySelector<HTMLElement>("[data-score='orange']");
+    const currentPlayer = this.root.querySelector<HTMLElement>("[data-current-player]");
+    if (blueScore) blueScore.textContent = `◆ Blue ${this.game.scores.blue}`;
+    if (orangeScore) orangeScore.textContent = `◆ Orange ${this.game.scores.orange}`;
+    if (currentPlayer) {
+      currentPlayer.className = `player-marker--${this.game.currentPlayer}`;
+      currentPlayer.setAttribute("aria-label", `${this.game.currentPlayer} player`);
     }
   }
 
@@ -136,7 +161,8 @@ export class MemoryApp {
   private renderScoreboard(): string {
     const scores = this.game?.scores ?? { blue: 0, orange: 0 };
     const current = this.game?.currentPlayer ?? this.settings.startingPlayer ?? "blue";
-    return `<header class="scoreboard"><div class="scoreboard__scores"><span class="player--blue">◆ Blue ${scores.blue}</span><span class="player--orange">◆ Orange ${scores.orange}</span></div><div class="scoreboard__current">Current player: <span class="player-marker--${current}" aria-label="${current} player">◆</span></div><button class="button button--outline" data-action="open-exit">⇥&nbsp; Exit game</button></header>`;
+    const theme = themes[this.settings.theme ?? "code-vibes"];
+    return `<header class="scoreboard"><div class="scoreboard__scores"><span class="player--blue" data-score="blue">◆ Blue ${scores.blue}</span><span class="player--orange" data-score="orange">◆ Orange ${scores.orange}</span></div><div class="scoreboard__current">Current player: <span class="player-marker--${current}" data-current-player aria-label="${current} player">◆</span></div><button class="game-exit-button" data-action="open-exit" aria-label="Exit game"><img class="game-exit-button__default" src="${theme.exitButton.default}" alt=""><img class="game-exit-button__hover" src="${theme.exitButton.hover}" alt=""></button></header>`;
   }
 
   private renderGame(): string {

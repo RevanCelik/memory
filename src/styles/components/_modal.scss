@@ -1,7 +1,24 @@
 @use "../abstracts" as *;
 
-.modal-backdrop { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 1rem; background: rgba(#000, 0.6); }
-.modal { width: min(440px, 100%); padding: 2.2rem; text-align: center; color: $dark; background: #fff; }
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(#000, 0.6);
+  animation: modal-backdrop-in 260ms ease-out both;
+}
+
+.modal {
+  width: min(440px, 100%);
+  padding: 2.2rem;
+  text-align: center;
+  color: $dark;
+  background: #fff;
+  animation: modal-drop-in 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
 .modal h2 { font-size: 1.35rem; max-width: 330px; margin: 0 auto; }
 .modal__actions { display: flex; justify-content: center; gap: 1rem; margin-top: 1.8rem; }
 .modal .button--outline { color: $mint; }
@@ -32,4 +49,52 @@
 }
 
 .theme--gaming .modal { color: $gaming-bg; border-radius: 14px; }
-.theme--gaming .modal .button--outline { color: $pink; }
+
+.theme--gaming .modal .button {
+  border-radius: 5px;
+}
+
+.theme--gaming .modal .button--primary {
+  background: $pink;
+  color: #fff;
+
+  &:hover {
+    background: #f34793;
+    box-shadow: inset 0 0 0 2px #bd0758, 0 0 7px rgba($pink, 0.25);
+    filter: none;
+    transform: none;
+  }
+}
+
+.theme--gaming .modal .button--outline {
+  color: $pink;
+
+  &:hover {
+    background: rgba($pink, 0.12);
+    color: $pink;
+    box-shadow: inset 0 0 0 2px $pink, 0 0 7px rgba($pink, 0.25);
+    filter: none;
+    transform: none;
+  }
+}
+
+@keyframes modal-backdrop-in {
+  from { background: rgba(#000, 0); }
+  to { background: rgba(#000, 0.6); }
+}
+
+@keyframes modal-drop-in {
+  from {
+    opacity: 0;
+    transform: translateY(calc(-50vh - 100%));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-backdrop,
+  .modal { animation: none; }
+}

@@ -9,6 +9,7 @@ export interface ThemeDefinition {
   cardBack: string;
   themeVisual: string;
   icons: string[];
+  exitButton: { default: string; hover: string };
   resultVisuals?: Record<"blue" | "orange" | "draw", string>;
 }
 
