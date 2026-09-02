@@ -190,7 +190,22 @@ export class MemoryApp {
     const visual = resultVisual
       ? `<img class="result-screen__visual" src="${resultVisual}" alt="">`
       : `<div class="result-screen__symbol" aria-hidden="true">${winner === "draw" ? "⚖" : "🏆"}</div>`;
-    return `<section class="result-screen screen result-screen--${winner}"><p>${winner === "draw" ? "It’s a" : "The winner is"}</p><h1>${winner === "draw" ? "Draw" : `${winner} player`}</h1>${visual}<button class="button button--outline" data-action="go-home">Back to start</button></section>`;
+    const confetti = winner === "draw" ? "" : this.renderConfetti();
+    return `<section class="result-screen screen result-screen--${winner}">${confetti}<div class="result-screen__content"><p>${winner === "draw" ? "It’s a" : "The winner is"}</p><h1>${winner === "draw" ? "Draw" : `${winner} player`}</h1>${visual}<button class="button button--outline" data-action="go-home">Back to start</button></div></section>`;
+  }
+
+  private renderConfetti(): string {
+    const pieces = Array.from({ length: 52 }, (_, index) => {
+      const x = (index * 37 + 3) % 100;
+      const landingY = 42 + ((index * 29) % 105);
+      const rotation = ((index * 67) % 240) - 120;
+      const delay = (index % 9) * 34;
+      const shape = index % 7 === 0 ? "ribbon" : index % 5 === 0 ? "diamond" : "dash";
+      const color = ["red", "blue", "yellow", "green"][index % 4];
+      return `<i class="confetti__piece confetti__piece--${shape} confetti__piece--${color}" style="--x:${x};--landing-y:${landingY}px;--rotation:${rotation}deg;--delay:${delay}ms"></i>`;
+    }).join("");
+
+    return `<div class="confetti" aria-hidden="true">${pieces}</div>`;
   }
 
   private renderExitDialog(): string {
