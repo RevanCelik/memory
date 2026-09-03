@@ -1,4 +1,5 @@
 import { themes } from "./data/themes";
+import { playButton } from "./play-button";
 import { MemoryGame } from "./game/memory-game";
 import type { BoardSize, GameSettings, PlayerId, Screen, ThemeId } from "./types";
 
@@ -11,11 +12,6 @@ const startButtonAssets = {
   default: buttonAsset("Property 1=default.svg"),
   hover: buttonAsset("Property 1=hover.svg"),
   disabled: buttonAsset("Property 1=disabled.svg"),
-};
-
-const playButtonAssets = {
-  default: buttonAsset("play_default.svg"),
-  hover: buttonAsset("play_hover.svg"),
 };
 
 export class MemoryApp {
@@ -131,7 +127,7 @@ export class MemoryApp {
   }
 
   private renderHome(): string {
-    return `<section class="home-screen screen"><div class="home-screen__content"><p>It’s play time.</p><h1>Ready to play?</h1><button class="home-play-button" data-action="open-settings" aria-label="Play"><img class="home-play-button__default" src="${playButtonAssets.default}" alt=""><img class="home-play-button__hover" src="${playButtonAssets.hover}" alt=""></button></div><div class="home-screen__controller">${controllerIcon}</div></section>`;
+    return `<section class="home-screen screen"><div class="home-screen__content"><p>It’s play time.</p><h1>Ready to play?</h1><button class="home-play-button" data-action="open-settings" aria-label="Play">${playButton}</button></div><div class="home-screen__controller">${controllerIcon}</div></section>`;
   }
 
   private renderSettings(): string {

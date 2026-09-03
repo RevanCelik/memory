@@ -69,11 +69,28 @@
   padding: 0;
   background: transparent;
 
-  img { position: absolute; width: 100%; height: 100%; object-fit: contain; }
-  &__default { width: 92.6% !important; height: 96% !important; }
-  &__hover { display: none; }
-  &:hover &__default { display: none; }
-  &:hover &__hover { display: block; }
+  &__art {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+    color: $dark;
+  }
+  &__art :is(rect, path) {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 550ms cubic-bezier(0.4, 0, 0.2, 1), stroke-width 550ms ease;
+  }
+  &__arrow { stroke: currentColor; stroke-width: 0; }
+  &:is(:hover, :focus-visible) &__background { transform: scale(1.08, 1.04); }
+  &:is(:hover, :focus-visible) &__controller { transform: translateX(6px) rotate(-26deg) scale(1.1); }
+  &:is(:hover, :focus-visible) &__label { transform: translateX(6px); }
+  &:is(:hover, :focus-visible) &__arrow { transform: translateX(7px) scale(1.1); stroke-width: 1; }
+  &:focus-visible { outline: 2px solid $yellow; outline-offset: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-play-button__art :is(rect, path) { transition: none; }
 }
 
 .game-exit-button {
