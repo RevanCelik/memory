@@ -37,7 +37,8 @@ export class MemoryApp {
     if (action === "start-game") this.startGame();
     if (action === "open-exit") this.exitDialogOpen = true;
     if (action === "close-exit") this.exitDialogOpen = false;
-    if (action === "exit-game" || action === "go-home") this.goHome();
+    if (action === "exit-game") this.goToSettings();
+    if (action === "go-home") this.goHome();
     if (action === "flip-card" && target.dataset.cardId) {
       this.flipCard(target.dataset.cardId);
       return;
@@ -109,6 +110,13 @@ export class MemoryApp {
   private goHome(): void {
     if (this.resultTimer) window.clearTimeout(this.resultTimer);
     this.screen = "home";
+    this.game = null;
+    this.exitDialogOpen = false;
+  }
+
+  private goToSettings(): void {
+    if (this.resultTimer) window.clearTimeout(this.resultTimer);
+    this.screen = "settings";
     this.game = null;
     this.exitDialogOpen = false;
   }

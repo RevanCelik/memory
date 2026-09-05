@@ -11,7 +11,22 @@
 .legend-icon--player { color: #00dcb4; }
 .legend-icon--board { color: #124cec; }
 .settings-preview__visual { display: block; width: 100%; height: auto; }
-.settings-steps { display: flex; align-items: center; justify-content: center; gap: 0.9rem; margin-top: 2rem; padding: 0.7rem; background: #f6f6f6; font-size: 0.85rem; }
+.settings-steps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 4px minmax(0, 1fr) 4px minmax(0, 1.25fr) 140px;
+  align-items: center;
+  gap: clamp(0.35rem, 1vw, 0.9rem);
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0.7rem;
+  background: #f6f6f6;
+  font-size: clamp(0.72rem, 1vw, 0.85rem);
+}
+.settings-steps > span {
+  min-width: 0;
+  text-align: center;
+  white-space: nowrap;
+}
 .settings-steps i {
   position: relative;
   width: 4px;
@@ -34,7 +49,7 @@
 @media (max-width: 760px) {
   .settings-screen__grid { grid-template-columns: 1fr; margin-top: 2.5rem; }
   .settings-preview { max-width: 520px; }
-  .settings-steps { flex-wrap: wrap; }
+  .settings-steps { display: flex; flex-wrap: wrap; }
   .settings-steps i, .settings-steps > span { display: none; }
   .start-button { margin: 0 auto; }
 }

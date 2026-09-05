@@ -75,6 +75,14 @@
     b { transform: rotate(45deg) scale(1); }
   }
 
+  &:has(input:not(:checked)):hover &__marker,
+  input:focus-visible ~ &__marker {
+    opacity: 1;
+
+    i { transform: scaleX(1); }
+    b { transform: rotate(45deg) scale(1); }
+  }
+
   &:has(input:not(:checked)):hover &__label {
     font-weight: 600;
     transform: translateX(1px);
